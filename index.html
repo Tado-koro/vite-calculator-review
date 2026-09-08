@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>vite-calculator-review</title>
+  </head>
+  <body>
+    <script type="module" src="/src/main.ts"></script>
+    <link rel="stylesheet" href="./src/style.css">
+    <div class="calculator-body">
+       <div id="display">
+        <div id="history-display"></div><!-- 計算途中 -->
+        <div id="result-display">0</div><!-- 計算結果 -->
+       </div>
+      <div class="buttons">
+        <button data-key="7">7</button>
+        <button data-key="8">8</button>
+        <button data-key="9">9</button>
+        <button data-key="÷" class="operator">÷</button>
+        <button data-key="4">4</button>
+        <button data-key="5">5</button>
+        <button data-key="6">6</button>
+        <button data-key="*" class="operator">×</button>
+        <button data-key="1">1</button>
+        <button data-key="2">2</button>
+        <button data-key="3">3</button>
+        <button data-key="-" class="operator">-</button>
+        <button data-key="0">0</button>
+        <button data-key="." class="dot">.</button>
+        <button data-key="C" class="clear">C</button>
+        <button data-key="+" class="operator">+</button>
+      </div>
+      <button id="equal-button">=</button>
+    </div>
+      </body>
+</html>
