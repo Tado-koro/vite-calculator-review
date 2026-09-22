@@ -1,23 +1,29 @@
 import { Calculator } from "./Calculator";
 
 export class InputBuffer{
-  private value : string;
-  private maxDigits : number;
+  constructor(
+    private readonly maxDigits: number,
+    private value = ""
+  ){}
 
-  constructor(value:string, maxDigits:number){
-    this.value = value;
-    this.maxDigits = maxDigits;
+  public pushDigit(d:number):void{}
+
+  public pushDecimal():void{}
+
+  public clear():void{
+    this.value = "";
   }
 
-  pushDigit(d:number):void{}
+  public toNumber():number{
+    return Number(this.value || 0);
+  }
 
-  pushDecimal():void{}
+  public isEmpty():boolean{
+    return this.value.length === 0;
+  }
 
-  clear():void{}
-
-  toNumber():number{}
-
-  isEmpty():boolean{}
-
-  digitCount():number{}
+  public digitCount():number{
+    return this.value.replace(/[.\-]/g, "").length;
+  }
+  //桁数評価から記号を除外
 }

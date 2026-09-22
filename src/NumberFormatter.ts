@@ -1,13 +1,11 @@
 import { Calculator } from "./Calculator";
 
 export class NumberFormatter{
-  private maxDigits : number;
+  constructor(private readonly maxDigits:number){}
 
-  constructor(maxDigits:number){
-    this.maxDigits = maxDigits;
+  public formatForDisplay(n:number):string{/*末尾0削除・指数切り替え*/
+    return "仮";
   }
-
-  formatForDisplay(n:number):string{}
 
   fits(n:number):boolean{}
 }

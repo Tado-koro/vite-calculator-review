@@ -8,33 +8,27 @@ import { KeyMapper } from "./KeyMapper";
 import { Config } from "./Config";
 
 
-export class Calculator implements IDisplay{
+export class Calculator{
   private state : CalcState;
   private left : number|null;
   private operator : Operation|null;
-  private buffer : InputBuffer;
-  private evaluator : Evaluator;
-  private formatter : NumberFormatter;
-  private display : IDisplay;
 
   constructor(
     state: CalcState,
     left: number|null,
     operator: Operation|null,
-    buffer : InputBuffer,
-    evaluator : Evaluator,
-    formatter : NumberFormatter,
-    display : IDisplay
-  ){
+    private readonly display : IDisplay,
+    private readonly formatter = new NumberFormatter(Config.MAX_DIGITS),
+    private readonly evaluator = new Evaluator(),
+    private readonly buffer = new InputBuffer(Config.MAX_DIGITS)
+){
     this.state = state;
     this.left = left;
     this.operator = operator;
-    this.buffer = buffer;
-    this.evaluator = evaluator;
-    this.formatter = formatter;
-    this.display = display;
   }
 
+  public handle(token: KeyToken):void{}
+  
   handleDigit(d:number):void{}
 
   handleDecimalPoint():void{}
