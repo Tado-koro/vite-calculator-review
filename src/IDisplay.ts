@@ -1,5 +1,8 @@
-export interface IDisplay{
-  render(text:string):void{};
+import { DomDisplay } from "./DomDisplay";
+import { Calculator } from "./Calculator";
 
-  renderError(message:string):void{};
+export interface IDisplay{
+  render(text:string):void;
+
+  renderError(message:string):void;
 }

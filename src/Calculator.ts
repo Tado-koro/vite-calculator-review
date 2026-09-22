@@ -1,8 +1,14 @@
-import { CalcState } from "./CalcState";
-import { Operation } from "./Operation";
+import { CalcState } from "./CalcState";//Enum
+import { Operation } from "./Operation";//Enum
+import type { IDisplay } from "./IDisplay";
+import { InputBuffer } from "./InputBuffer";
+import { Evaluator } from "./Evaluator";
+import { NumberFormatter } from "./NumberFormatter";
+import { KeyMapper } from "./KeyMapper";
+import { Config } from "./Config";
 
 
-export class Calculator{
+export class Calculator implements IDisplay{
   private state : CalcState;
   private left : number|null;
   private operator : Operation|null;
