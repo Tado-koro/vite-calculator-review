@@ -4,8 +4,8 @@ import type { IDisplay } from "./IDisplay";
 import { InputBuffer } from "./InputBuffer";
 import { Evaluator } from "./Evaluator";
 import { NumberFormatter } from "./NumberFormatter";
-import { KeyMapper } from "./KeyMapper";
 import { Config } from "./Config";
+import type { KeyToken } from "./KeyToken";
 
 
 export class Calculator{
@@ -29,7 +29,10 @@ export class Calculator{
 
   public handle(token: KeyToken):void{}
   
-  handleDigit(d:number):void{}
+  handleDigit(d:number):void{
+    this.buffer.pushDigit(d);
+    this.state = CalcState.InputtingFirst;
+  }
 
   handleDecimalPoint():void{}
 

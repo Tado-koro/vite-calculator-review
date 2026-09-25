@@ -1,3 +1,4 @@
+//0除算
 export class DivisionByZeroError extends Error{
   message : string;
 
