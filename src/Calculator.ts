@@ -6,6 +6,7 @@ import { Evaluator } from "./Evaluator";
 import { NumberFormatter } from "./NumberFormatter";
 import { Config } from "./Config";
 import type { KeyToken } from "./KeyToken";
+import { DivisionByZeroError } from "./DivisionByZeroError";
 
 
 export class Calculator{
@@ -32,13 +33,35 @@ export class Calculator{
   handleDigit(d:number):void{
     this.buffer.pushDigit(d);
     this.state = CalcState.InputtingFirst;
+    const currentNumber = this.buffer.toNumber();
+    const displayText = this.formatter.formatForDisplay(currentNumber);
+    this.display.render(displayText);
   }
 
   handleDecimalPoint():void{}
 
   handleOperator(op:Operation):void{}
 
-  handleEqual():void{}
+  handleEqual():void{
+    if(this.left !== null && this.operator !==null){
+      const a = this.left;
+      const op = this.operator;
+      const b = this.buffer.toNumber();
+      
+    try{
+      const result = this.evaluator.compute(a,op,b);
+      this.state = CalcState.ResultShown;
+      const displayText = this.formatter.formatForDisplay(result);
+      this.display.render(displayText);
+    }catch(error){
+      this.state = CalcState.Error;
+      if(error instanceof DivisionByZeroError){
+        this.display.renderError("エラー");
+        console.error(error);
+        }
+    }
+    }
+  }
 
   handleClear():void{}
 
