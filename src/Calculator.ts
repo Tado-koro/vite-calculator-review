@@ -48,18 +48,22 @@ export class Calculator{
       const op = this.operator;
       const b = this.buffer.toNumber();
       
-    try{
-      const result = this.evaluator.compute(a,op,b);
-      this.state = CalcState.ResultShown;
-      const displayText = this.formatter.formatForDisplay(result);
-      this.display.render(displayText);
-    }catch(error){
-      this.state = CalcState.Error;
-      if(error instanceof DivisionByZeroError){
-        this.display.renderError("エラー");
-        console.error(error);
-        }
-    }
+      try{
+        const result = this.evaluator.compute(a,op,b);
+        this.left = result;
+        this.state = CalcState.ResultShown;
+        const displayText = this.formatter.formatForDisplay(result);
+        this.display.render(displayText);
+      }catch(error){
+        this.state = CalcState.Error;
+          if(error instanceof DivisionByZeroError){
+            this.display.renderError("エラー");
+            console.error(error);
+            this.left = null;
+            this.operator = null;
+            this.buffer.clear();
+            }
+      }
     }
   }
 

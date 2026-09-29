@@ -8,9 +8,10 @@ export class DomDisplay implements IDisplay{
   }
 
   render(text: string): void {
+    this.el.textContent = text;
   }
 
   renderError(message: string): void {
-    
+    this.el.textContent = message;
   }
 }
