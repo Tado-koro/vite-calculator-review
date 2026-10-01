@@ -40,7 +40,14 @@ export class Calculator{
 
   handleDecimalPoint():void{}
 
-  handleOperator(op:Operation):void{}
+  handleOperator(op:Operation):void{
+    if(this.left === null){
+      return;
+    }
+    this.operator = op;
+    this.state = CalcState.OperatorEntered;
+
+  }
 
   handleEqual():void{
     if(this.left !== null && this.operator !==null){
@@ -50,19 +57,31 @@ export class Calculator{
       
       try{
         const result = this.evaluator.compute(a,op,b);
+
+        if(Number.isNaN(result)){
+          this.state = CalcState.Error;
+          this.display.renderError("Error");
+          this.left = null;
+          this.operator = null;
+          this.buffer.clear();
+          return;
+        }
         this.left = result;
         this.state = CalcState.ResultShown;
         const displayText = this.formatter.formatForDisplay(result);
         this.display.render(displayText);
+
       }catch(error){
         this.state = CalcState.Error;
+
           if(error instanceof DivisionByZeroError){
-            this.display.renderError("エラー");
             console.error(error);
-            this.left = null;
-            this.operator = null;
-            this.buffer.clear();
-            }
+          }
+
+          this.display.renderError("Error");
+          this.left = null;
+          this.operator = null;
+          this.buffer.clear();
       }
     }
   }
