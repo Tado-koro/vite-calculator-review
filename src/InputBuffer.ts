@@ -26,4 +26,11 @@ export class InputBuffer{
     return this.value.replace(/[.\-]/g, "").length;
   }
   //桁数評価から記号を除外
+
+  public pushNegative():void{
+    if(this.value.startsWith("-")){
+      return;
+    }
+    this.value = "-" + this.value;
+  }
 }
