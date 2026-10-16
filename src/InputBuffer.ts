@@ -8,7 +8,15 @@ export class InputBuffer{
 
   public pushDigit(d:number):void{}
 
-  public pushDecimal():void{}
+  public pushDecimal():void{
+    if(this.value == ""){
+      this.value = "0.";
+    }
+    if(this.value.includes(".")){
+      return;
+    }
+    this.value = this.value + ".";
+  }
 
   public clear():void{
     this.value = "";

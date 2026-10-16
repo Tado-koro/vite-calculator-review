@@ -38,7 +38,15 @@ export class Calculator{
     this.display.render(displayText);
   }
 
-  handleDecimalPoint():void{}
+  
+  handleDecimalPoint():void{
+    if(this.state == CalcState.ResultShown){
+      this.buffer.clear();
+    }
+
+    this.buffer.pushDecimal();
+    this.state = CalcState.InputtingFirst;
+  }
 
 
   handleOperator(op:Operation):void{
@@ -125,10 +133,19 @@ export class Calculator{
     }
   }
 
-  handleClear():void{}
 
+  handleClear():void{
+    this.left = null;
+    this.operator = null;
+    this.buffer.clear();
+    this.state = CalcState.Ready;
+    this.display.render("0");
+  }
+
+/*
   handleAllClear():void{}
 
   handleBackspace():void{}
+*/
 }
 
