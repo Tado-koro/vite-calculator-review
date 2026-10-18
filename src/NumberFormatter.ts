@@ -7,7 +7,22 @@ export class NumberFormatter{
     if(this.fits(n)===true){
       return n.toString();
     }
-    
+
+    let expoString = "";
+    let endExpoString = "";
+
+    for(let k = 0; k < 8; k++){
+      expoString =  n.toExponential(k);
+      let expoOnlyString =  expoString.replace('.','');
+      expoOnlyString = expoOnlyString.replace('-','');
+
+      if(expoOnlyString.length > 8){
+        break;
+      }
+
+      endExpoString = expoString;
+    }
+    return endExpoString;
   }
 
   fits(n:number):boolean{
