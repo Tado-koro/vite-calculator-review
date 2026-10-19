@@ -13,8 +13,12 @@ export class NumberFormatter{
 
     for(let k = 0; k < 8; k++){
       expoString =  n.toExponential(k);
-      let expoOnlyString =  expoString.replace('.','');
-      expoOnlyString = expoOnlyString.replace('-','');
+      let expoOnlyString = expoString;
+
+      if(expoOnlyString.startsWith("-")){
+        expoOnlyString = expoOnlyString.slice(1);
+      }
+      expoOnlyString =  expoOnlyString.replace('.','');
 
       if(expoOnlyString.length > 8){
         break;
