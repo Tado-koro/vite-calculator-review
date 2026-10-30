@@ -13,11 +13,13 @@ export class Calculator{
   private state : CalcState;
   private left : number|null;
   private operator : Operation|null;
+  private history : string|null;
 
   constructor(
     state: CalcState,
     left: number|null,
     operator: Operation|null,
+    history: string|null,
     private readonly display : IDisplay,
     private readonly formatter = new NumberFormatter(Config.MAX_DIGITS),
     private readonly evaluator = new Evaluator(),
@@ -26,6 +28,7 @@ export class Calculator{
     this.state = state;
     this.left = left;
     this.operator = operator;
+    this.history = history;
   }
 
   public handle(token: KeyToken):void{}
@@ -141,6 +144,12 @@ export class Calculator{
     this.state = CalcState.Ready;
     this.display.render("0");
   }
+
+
+  updateHistory():void{
+    this.display.renderHistory(this.history);
+  }
+
 
 /*
   handleAllClear():void{}
